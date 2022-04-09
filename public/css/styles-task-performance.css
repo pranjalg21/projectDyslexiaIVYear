@@ -1,0 +1,52 @@
+
+
+body{
+  
+    text-align: center;
+    background-color: #f5f5f5;
+}
+.table td, .table th, .table thead th {
+  border-bottom: 1px solid #dee2e6;
+}
+.table thead th {
+  border-bottom: 2px solid #dee2e6;
+  border-top: 3px solid #dee2e6;
+}
+
+table {
+    text-align: center;
+    margin: auto;
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 70%;  
+  } 
+
+  tr,tbody{
+    text-align: center;
+  }
+ 
+  .tab-reg{
+    width: 70%;
+    padding: 20px;
+    box-shadow: 0px 0px 8px #888888;
+    border-radius: 10px;
+    background-color: white;
+    margin: 10px; 
+  }
+  
+  #sentencelist{
+    margin-bottom: 60px;
+  }
+.sent-head{
+  background-color: rgb(243, 186, 80);
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin:-20px;
+  margin-bottom: 0px;
+  padding: 10px;
+}
+  .footer{
+    background-color: rgb(0, 181, 187);
+    color: white;
+  }
