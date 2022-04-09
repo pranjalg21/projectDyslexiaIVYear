@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Stylesheets-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="/css/styles-header.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <style>
+        body{
+            text-align: center;
+            background-color: #f5f5f5;
+        }
+        #tasklist{
+            padding: 25px;
+            background-color: white;
+            margin-left: 40px;
+            margin-right: 40px;
+            margin-bottom: 110px;
+            border-radius: 10px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            
+            padding: 10px;
+        }
+
+        th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        height: 50px;
+        }
+
+        td{
+             cursor: pointer;
+        }
+        .clickable-row:hover 
+        {
+            background-color:#f5f5f5;
+           
+        }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            height: 60px;
+            width: 100%;
+            color: white;
+            background-color: rgb(0, 181, 187);
+            padding-top: 15px;
+            text-align: center;
+        }
+    </style>
+
+    <title>Admin Dashboard</title>
+</head>
+<body>
+
+    <%- include('header'); %>
+
+        <div id="tasklist"> 
+        
+            <table id="tab">
+                
+                <tbody>
+                    <tr>
+                        <th>Task No.</th>
+                        <th>No. of Sentences</th>
+                        <th>Status</th>
+                      </tr>
+                </tbody>
+                
+                
+            </table>
+            <br>
+    
+            
+            
+        </div>
+    
+    <%- include('footer'); %>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+
+        const heading=document.getElementById("heading");
+        heading.innerText="Student Tasklist";
+        const image=document.getElementById("image");
+        image.src="https://cdn.iconscout.com/icon/premium/png-256-thumb/web-dashboard-2276455-1897230.png";
+
+
+        const tasklist=JSON.parse('<%-JSON.stringify(tasklist)%>');
+        const studentid='<%-studentid%>';
+        //console.log(tasklist);
+        
+        for(var i=0;i<tasklist.length;i++)
+        {
+            const tab=document.getElementById("tab");
+            if(tasklist[i][1]==0){
+                tab.innerHTML+="<tr class='clickable-row' data-href='/admin/getstudent/"+studentid+"/"+i+"'><td>"+(i+1)+"</td><td>"+tasklist[i][0]+"</td><td>"+(tasklist[i][1]==0?'Not Completed':'Completed')+"</td></tr>";
+            }
+            else{
+                tab.innerHTML+="<tr class='clickable-row' data-href='/admin/getstudent/"+studentid+"/"+i+"'><td>"+(i+1)+"</td><td>"+tasklist[i][0]+"</td><td>"+(tasklist[i][1]==0?'Not Completed':'Completed')+"</td></tr>";
+            }
+        }
+
+        
+        $(document).ready(function($) {
+            $(".clickable-row").click(function() {
+                console.log("click");
+                window.location = $(this).data("href");
+            });
+        });
+
+    </script>
+   
+</body>
+</html>

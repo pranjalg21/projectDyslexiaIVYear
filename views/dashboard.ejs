@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Stylesheets-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="/css/styles-dashboard.css" rel="stylesheet">
+    <link href="/css/styles-header.css" rel="stylesheet">
+
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <title>Home:Dashboard</title>
+</head>
+<body>
+    <%- include('header'); %>
+
+    <center>
+            <div class="block">
+
+                <!--
+                <% if(typeof fname != 'undefined') {%>
+                <h1>Hello <%= fname %></h1>
+                <% }else{ %>
+                <h1>Hello</h1>
+                <% } %>
+                -->
+            
+                <div class="row">
+                    <div class="task col col-12 col-md-6">
+                        
+                            <a href="/tasklist"><button type="button" class="item btn btn-secondary">Perform Task</button></a>
+                        
+                        
+                    </div>
+                    <div class="task col col-12 col-md-6">
+                        
+                            <a href="/performance"><button type="button" class="item btn btn-secondary">Performance Records</button></a>
+                        
+                        
+                    </div>
+                </div>
+                <div class="row" style="display: block;">
+                    <div class="task col col-12 col-md-6">
+                        
+                            <a href="/profile"><button type="button" class="item btn btn-secondary">Update Profile</button></a>
+                        
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+
+    </center>
+
+    <%- include('footer'); %>
+    
+    
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+
+    <script>
+        
+        const heading=document.getElementById("heading");
+        heading.innerText="Dashboard";
+        const image=document.getElementById("image");
+        image.src="https://cdn.iconscout.com/icon/premium/png-256-thumb/web-dashboard-2276455-1897230.png";
+    </script>
+</body>
+</html>

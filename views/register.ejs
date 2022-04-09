@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Register</title>
+
+  <!-- Stylesheets-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  <link href="/css/styles-register.css" rel="stylesheet">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+</head>
+
+<body>
+  <div class="register">
+    <center>
+      <h1>Register</h1>
+      <% if(typeof err != 'undefined') {%>
+      <div id="error-msg">
+        <div class="alert alert-dismissible alert-danger">
+          <button type="button" onclick="crossClicked()" class="close" data-dismiss="alert">&times;</button>
+          <strong><%= err %></strong>
+        </div>
+      </div>
+      <% } %>
+    </center>
+    <form action="/register" method="post">
+      <div class="row">
+        <div class="col col-12 col-md-6">
+          <label for="fname">First Name:</label>
+          <input type="text" id="fname" class="form-control" placeholder="First name" name="fname" required="true">
+        </div>
+        <div class="col col-12 col-md-6">
+          <label for="lname">Last Name:</label>
+          <input type="text" class="form-control" placeholder="Last name" name="lname">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-12 col-md-6">
+          <label for="dob">Date Of Birth:</label>
+          <input type="date" id="dob" class="form-control" placeholder="dob" name="dob" required="true">
+        </div>
+        <div class="col col-12 col-md-6">
+          <label for="class">Class:</label>
+          <select class="form-control form-control-md" name="class">
+            <option>LKG</option>
+            <option>HKG</option>
+            <option>I</option>
+            <option>II</option>
+            <option>III</option>
+            <option>IV</option>
+            <option>V</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-12 col-md-6">
+          <label for="email">Email:</label>
+          <input type="email" id="email" class="form-control" placeholder="Enter your Email" name="username" required="true">
+        </div>
+        <div class="col col-12 col-md-6">
+          <label for="code">Joining Code</label>
+          <input type="text" class="form-control" placeholder="" name="code" required="true">
+        </div>
+        
+      </div>
+      <div class="row">
+        <div class="col col-12 col-md-6 relative">
+          <label for="password">Choose a Password:</label>
+          <input type="password" id="password" class="form-control" value="" name="password" required="true">
+          <i class="far fa-eye" id="togglePassword1"></i>
+        </div>
+        <div class="col col-12  col-md-6 relative">
+          <label for="cpassword">Confirm Password:</label>
+          <input type="password" id="cpassword" class="form-control" value="" name="cpassword" required="true">
+          <i class="far fa-eye" id="togglePassword2"></i>
+        </div>
+      </div>
+      <center>
+        <button type="button submit" id="sub-btn" class="btn btn-lg btn-primary">Submit</button>
+      </center>
+
+    </form>
+  </div>
+
+  <script>
+
+    function crossClicked(){
+      var error=document.getElementById("error-msg");
+      error.innerHTML="";
+    }
+
+    const togglePassword1 = document.querySelector('#togglePassword1');
+    const password = document.querySelector('#password');
+
+    togglePassword1.addEventListener('click', function (e) {
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        this.classList.toggle('fa-eye-slash');
+    });
+
+    const togglePassword2 = document.querySelector('#togglePassword2');
+    const cpassword = document.querySelector('#cpassword');
+
+    togglePassword2.addEventListener('click', function (e) {
+        const type = cpassword.getAttribute('type') === 'password' ? 'text' : 'password';
+        cpassword.setAttribute('type', type);
+        this.classList.toggle('fa-eye-slash');
+    });
+    
+  </script>
+</body>
+
+</html>

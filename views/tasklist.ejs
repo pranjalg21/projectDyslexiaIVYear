@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Stylesheets-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="/css/styles-tasklist.css" rel="stylesheet">
+    <link href="/css/styles-header.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <title>Tasks</title>
+</head>
+<body>
+
+    <%- include('header'); %>
+
+    <div id="tasklist"> 
+
+        
+        
+        <% var i=1; %>
+        <% for(var i=1;i<=tasklist.length;i++){ %>
+            <% if(tasklist[i-1]==0){ %>
+                <div class="task">
+                    <a href="/task/<%= (i-1) %>">
+                        <button class="item">
+                            <div class="card">
+                                <div class="msg not-completed">
+                                    <h4>YET TO COMPLETE</h4>
+                                </div>
+                                
+                                <div class="card-body">
+                                  <h5>Task <%= i %></h5>
+                                </div>
+                            </div>
+                        </button>
+                        
+                    </a>
+                </div>
+            <% }else{ %>
+                <div class="task">
+                    <a href="/task/<%= (i-1) %>">
+                        <button class="item">
+                            <div class="card">
+                                <div class="msg completed">
+                                    <h4>COMPLETED</h4>
+                                </div>
+                                
+                                <div class="card-body">
+                                  <h5>Task <%= i %></h5>
+                                </div>
+                            </div>
+                        </button>
+                        
+                    </a>
+                </div>
+            <% } %>
+        <% } %>
+        
+    </div>
+
+    <%- include('footer'); %>
+    
+   
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+
+        const heading=document.getElementById("heading");
+        heading.innerText="Tasks";
+        const image=document.getElementById("image");
+        image.src="https://image.flaticon.com/icons/png/512/124/124772.png";
+    </script>
+</body>
+</html>

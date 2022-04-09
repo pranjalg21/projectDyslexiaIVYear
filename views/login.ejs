@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dyslexia</title>
+
+    <!-- Stylesheets-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link href="/css/styles-login.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <title>Login</title>
+</head>
+<body>
+
+    <form class="form-signin" action="/login" method="post">
+
+        <h1>Login</h1>
+        <% if(typeof err != 'undefined') {%>
+          <div id="error-msg">
+            <div class="alert alert-dismissible alert-danger">
+              <button type="button" onclick="crossClicked()" class="close" data-dismiss="alert">&times;</button>
+              <strong><%= err %></strong>
+            </div>
+          </div>
+          <% } %>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="true" autofocus="" name="username">
+        <div class="relative"> 
+          <label for="inputPassword" class="sr-only">Password</label>
+          <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="true" name="password">
+          <i class="far fa-eye" id="togglePassword"></i>
+        </div>
+        
+        
+        <div class="checkbox mb-3">
+          <!--
+          <label>
+            <input type="checkbox" value="Remember me"> Remember me
+          </label> -->
+        </div>
+       
+
+        <button class="btn btn-lg btn-primary" id="sub-btn" type="submit">Sign in</button>
+
+      </form>
+
+
+      <script>
+
+        function crossClicked(){
+          var error=document.getElementById("error-msg");
+          error.innerHTML="";
+        }
+
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#inputPassword');
+
+        togglePassword.addEventListener('click', function (e) {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash');
+        });
+      </script>
+
+</body>
+</html>

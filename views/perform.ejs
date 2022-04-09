@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Stylesheets-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="/css/styles-task.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <title>Perform Task</title>
+</head>
+<body>
+
+    <center>
+        <button>Start</button>
+        <button>End</button>
+        <br>
+        <br>
+        <p><%= sentence %></p>
+        <p><%= no_of_words %></p>
+
+        <form id="start-form" action="/task/<%= taskid %>/<%= sentid %>/0/next" method="post">
+            <% var i=1; %>
+            <% for(var i=1;i<=no_of_words;i++){ %>
+                <input type="hidden" id="word<%= i %>" name="word<%= i %>" value="<%= new Date() %>">
+            <% } %>
+            
+        </form>
+            
+        
+        <a href="/task/<%= taskid %>/<%= parseInt(sentid)+1 %>"><button type="button" class="btn btn-secondary">Next Sentence</button></a>
+        
+    </center>
+
+</body>
+</html>

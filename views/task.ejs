@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Stylesheets-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/css/index.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="/css/styles-task.css" rel="stylesheet">
+    <link href="/css/styles-header.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/keyboard.css">
+    <link href="/css/styles-modal.css" rel="stylesheet">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <title>Task</title>
+</head>
+<body>
+    <%- include('header'); %>
+
+   <center>
+
+    <a href="#myModal-right" id="modal-right" class="trigger-btn" data-toggle="modal">Click to Open Confirm Modal</a>
+    
+    <!-- Modal HTML -->
+    <div id="myModal-right" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <center>
+                <div class="modal-header">
+                    <div class="icon-box">
+                        <i class="material-icons">&#xE876;</i>
+                    </div>				
+                    <h4 class="modal-title w-100">Well Done!</h4>	
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">Proceed to the next sentence</p>
+                </div>
+                
+                    <div class="modal-footer">
+                        <a href="/task/<%= taskid %>/<%= parseInt(sentid)+1 %>" id="modal-OK"><button type="button" class="btn btn-secondary btn-success">Next Sentence</button></a>
+                        
+                    </div>
+                
+                </center>
+            </div>
+        </div>
+    </div>    
+
+    <div class="parent">
+        
+        <div class="part1">
+              <div class="write-part">
+    
+                    <div id="display"></div>
+            
+                    <div id="check-message"></div>   
+            
+                    <form id="sentInput" action="/task/<%= taskid %>/<%= sentid %>/submit" method="post">
+            
+                        <input type="text" id="input" class="input use-keyboard-input" name="sentence" autofocus="true" autocomplete="off" disabled>
+                            
+                        <div class="simple-keyboard" id="keyboard" style="display: none;"></div>
+                        
+            
+                        <button id="sentsubmit" class="button submit btn btn-secondary" disabled>Submit</button>
+            
+                    </form>
+            
+                </div>
+
+        </div>
+        
+
+        <div class="part2">
+            <center>
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col">
+                            <a href="/tasklist"><button id="back" type="button" class="col-btn">Back</button></a>
+                        </div>
+                    </div>
+            
+                    <div class="row">
+                        <div class="col">
+                            <form id="start-form" action="/task/<%= taskid %>/<%= sentid %>/0/next" method="post">
+                                <button id="start" class="button submit col-btn" disabled><strong>GO</strong></button>
+                            </form>
+                        </div>
+                        <div class="col">
+                            <form id="next-form" action="/task/<%= taskid %>/<%= sentid %>/<%= wordno %>/next" method="post">
+                        
+                                <input type="hidden" id="word" name="word" autofocus="true" autocomplete="off" disabled>
+                                <button id="next" class="button submit col-btn" disabled><i class="fas fa-arrow-right"></i>
+                                </button>
+                        
+                            </form>
+                        </div>
+                    </div>
+            
+                    <div class="row">
+                        <div class="col">
+                            <button id="speak" type="button" class="col-btn" onclick="say()" disabled><i class="fas fa-volume-up"></i></button>
+                        </div>
+                        <div class="col">
+                            <button id="write" type="button" class="col-btn" onclick="setInputFields()" disabled><i class="fas fa-edit"></i></button>
+                        </div>
+                    </div>
+            
+                    <div class="row">
+                        <div class="col">
+                            <a href="/task/<%= taskid %>/<%= parseInt(sentid)+1 %>"><button id="nextsentence" type="button" class="col-btn" disabled>Next Sentence</button></a>
+                        </div>
+                    </div>
+                    
+                </div> 
+            </center>
+        </div>
+
+        
+    </div>
+
+    
+    
+
+   </center>
+
+   <%- include('footer'); %>
+    
+   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+   
+   <script>
+
+       /**************** Keyboard ********************/
+
+       const Keyboard = {
+        elements: {
+            main: null,
+            keysContainer: null,
+            keys: []
+        },
+
+        eventHandlers: {
+            oninput: null,
+            onclose: null
+        },
+
+        properties: {
+            value: "",
+            capsLock: false
+        },
+
+        init() {
+            // Create main elements
+            this.elements.main = document.createElement("div");
+            this.elements.keysContainer = document.createElement("div");
+
+            // Setup main elements
+            this.elements.main.classList.add("keyboard", "keyboard--hidden");
+            this.elements.keysContainer.classList.add("keyboard__keys");
+            this.elements.keysContainer.appendChild(this._createKeys());
+
+            this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard__key");
+
+            // Add to DOM
+            this.elements.main.appendChild(this.elements.keysContainer);
+            document.body.appendChild(this.elements.main);
+
+            // Automatically use keyboard for elements with .use-keyboard-input
+            document.querySelectorAll(".use-keyboard-input").forEach(element => {
+                element.addEventListener("focus", () => {
+                    this.open(element.value, currentValue => {
+                        element.value = currentValue;
+                    });
+                });
+            });
+        },
+
+        _createKeys() {
+            const fragment = document.createDocumentFragment();
+            const keyLayout = [
+                "(",")","&",'"',"'",";",":","!","?",
+                "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "backspace",
+                "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
+                "caps", "a", "s", "d", "f", "g", "h", "j", "k", "l", "enter",
+                "done", "z", "x", "c", "v", "b", "n", "m", ",", ".", 
+                "space"
+            ];
+
+            // Creates HTML for an icon
+            const createIconHTML = (icon_name) => {
+                return `<i class="material-icons">${icon_name}</i>`;
+            };
+
+            keyLayout.forEach(key => {
+                const keyElement = document.createElement("button");
+                const insertLineBreak = ["?","backspace", "p", "enter", "."].indexOf(key) !== -1;
+
+                // Add attributes/classes
+                keyElement.setAttribute("type", "button");
+                keyElement.classList.add("keyboard__key");
+
+                switch (key) {
+                    case "backspace":
+                        keyElement.classList.add("keyboard__key--wide");
+                        keyElement.innerHTML = createIconHTML("backspace");
+
+                        keyElement.addEventListener("click", () => {
+                            this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
+                            this._triggerEvent("oninput");
+                        });
+
+                        break;
+
+                    case "caps":
+                        keyElement.classList.add("keyboard__key--wide", "keyboard__key--activatable");
+                        keyElement.innerHTML = createIconHTML("keyboard_capslock");
+
+                        keyElement.addEventListener("click", () => {
+                            this._toggleCapsLock();
+                            keyElement.classList.toggle("keyboard__key--active", this.properties.capsLock);
+                        });
+
+                        break;
+
+                    case "enter":
+                        keyElement.classList.add("keyboard__key--wide");
+                        keyElement.innerHTML = createIconHTML("keyboard_return");
+
+                        keyElement.addEventListener("click", () => {
+                            this.properties.value += "\n";
+                            this._triggerEvent("oninput");
+                        });
+
+                        break;
+
+                    case "space":
+                        keyElement.classList.add("keyboard__key--extra-wide");
+                        keyElement.innerHTML = createIconHTML("space_bar");
+
+                        keyElement.addEventListener("click", () => {
+                            this.properties.value += " ";
+                            this._triggerEvent("oninput");
+                        });
+
+                        break;
+
+                    case "done":
+                        keyElement.classList.add("keyboard__key--wide", "keyboard__key--dark");
+                        keyElement.innerHTML = createIconHTML("check_circle");
+
+                        keyElement.addEventListener("click", () => {
+                            this.close();
+                            this._triggerEvent("onclose");
+                        });
+
+                        break;
+
+                    default:
+                        keyElement.textContent = key.toLowerCase();
+
+                        keyElement.addEventListener("click", () => {
+                            this.properties.value += this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();
+                            this._triggerEvent("oninput");
+                        });
+
+                        break;
+                }
+
+                fragment.appendChild(keyElement);
+
+                if (insertLineBreak) {
+                    fragment.appendChild(document.createElement("br"));
+                }
+            });
+
+            return fragment;
+        },
+
+        _triggerEvent(handlerName) {
+            if (typeof this.eventHandlers[handlerName] == "function") {
+                this.eventHandlers[handlerName](this.properties.value);
+            }
+        },
+
+        _toggleCapsLock() {
+            this.properties.capsLock = !this.properties.capsLock;
+
+            for (const key of this.elements.keys) {
+                if (key.childElementCount === 0) {
+                    key.textContent = this.properties.capsLock ? key.textContent.toUpperCase() : key.textContent.toLowerCase();
+                }
+            }
+        },
+
+        open(initialValue, oninput, onclose) {
+            this.properties.value = initialValue || "";
+            this.eventHandlers.oninput = oninput;
+            this.eventHandlers.onclose = onclose;
+            this.elements.main.classList.remove("keyboard--hidden");
+        },
+
+        close() {
+            this.properties.value = "";
+            this.eventHandlers.oninput = oninput;
+            this.eventHandlers.onclose = onclose;
+            this.elements.main.classList.add("keyboard--hidden");
+        }
+    };
+
+    window.addEventListener("DOMContentLoaded", function () {
+        Keyboard.init();
+    });
+
+   </script>
+    
+   <script>
+
+       const heading=document.getElementById("heading");
+       heading.innerText="Perform Task";
+       const image=document.getElementById("image");
+       image.src="https://image.flaticon.com/icons/png/128/1632/1632670.png";
+
+       
+        
+       const startValid = '<%-startValid%>';
+       const nextValid = '<%-nextValid%>';
+       const inputCheck = '<%-inputCheck%>';
+       var nextSentenceValid = 0;
+       var writeValid=0;
+       var speakValid=0;
+       var submitValid=0;
+       var inputValid=0;
+
+
+       if(inputCheck==1)
+       {
+           nextSentenceValid=1;
+       }
+
+       if(startValid==0)
+       {
+           speakValid=1;
+       }
+
+       if(startValid==0&&nextValid==0)
+       {
+           writeValid=1;
+       }
+       function setInputFields()
+       {
+           submitValid=1;
+           inputValid=1;
+           const sentsubmit=document.getElementById("sentsubmit");
+            sentsubmit.removeAttribute("disabled");
+            const inputfield=document.getElementById("input");
+            inputfield.removeAttribute("disabled");
+            const keyb=document.getElementById("keyboard");
+            keyb.style.removeProperty("display");
+       }
+
+        const wordno = '<%-wordno%>';
+        const text = '<%-text%>';
+        const textLength=text.length;
+        var index=0;
+        
+        var s="";
+        var cnt=0,i=0;
+        for(i=0;i<textLength;i++)
+        {
+            if(cnt==wordno)
+            {
+                break; 
+            }
+
+            if(text[i]==' ')
+            cnt++;
+            s=s+text[i];
+        }
+
+        const display=document.getElementById("display");
+        display.innerHTML=s;
+
+        /*
+        if(wordno != -1){
+            const display=document.getElementById("display");
+            display.innerHTML=text;
+            const show=document.getElementById("show");
+            show.setAttribute("disabled", true);
+        }
+        
+        
+        function showNextWord(){
+            var shownText=document.getElementById("display").innerHTML;
+            while(index<textLength && text[index]!=' ')
+            {
+                shownText=shownText+text[index];
+                index=index+1;
+            }
+            shownText=shownText+" ";
+            const display=document.getElementById("display");
+            display.innerHTML=shownText;
+            index=index+1;
+            if(index>=textLength)
+            {
+                const start=document.getElementById("start");
+                start.removeAttribute("disabled");
+                const show=document.getElementById("show");
+                show.setAttribute("disabled", true);
+            }
+        }*/
+
+
+        if(startValid==1)
+        {
+            const start=document.getElementById("start");
+            start.removeAttribute("disabled");
+        }
+        else{
+            const startform=document.getElementById("start-form");
+            startform.action="";
+            const startid=document.getElementById("start-form");
+            startform.setAttribute("disabled",true);
+            startid.removeAttribute("onclick");
+            startid.href="";
+        }
+        if(nextValid==1)
+        {
+            const word=document.getElementById("word");
+            const next=document.getElementById("next");
+            word.removeAttribute("disabled");
+            next.removeAttribute("disabled");
+        }
+        if(nextSentenceValid==1)
+        {
+            const nextsentence=document.getElementById("nextsentence");
+            nextsentence.removeAttribute("disabled");
+        }
+        if(writeValid==1)
+        {
+            const write=document.getElementById("write");
+            write.removeAttribute("disabled");
+        }
+        if(speakValid==1)
+        {
+            const write=document.getElementById("speak");
+            write.removeAttribute("disabled");
+        }
+
+
+        if(inputCheck==1)
+        {
+            const checkMessage=document.getElementById("check-message");
+            document.getElementById('modal-right').click();
+        
+        }
+        if(inputCheck==-1)
+        {
+            const checkMessage=document.getElementById("check-message");
+            checkMessage.innerHTML='<div class="alert alert-dismissible alert-warning"><button type="button" onclick="crossClicked()" class="close" data-dismiss="alert">&times;</button><strong>Let us try again.</strong></div>';
+        }
+
+        function crossClicked(){
+        var error=document.getElementById("check-message");
+        error.innerHTML="";
+        }
+
+
+        if(submitValid==1)
+        {
+            const sentsubmit=document.getElementById("sentsubmit");
+            sentsubmit.removeAttribute("disabled");
+        }
+        if(inputValid==1)
+        {
+            const inputfield=document.getElementById("input");
+            inputfield.removeAttribute("disabled");
+        }
+
+        function say() {
+            const display_text=document.getElementById("display").innerText;
+          var msg = new SpeechSynthesisUtterance(display_text);
+          var voices = window.speechSynthesis.getVoices();
+          msg.volume = 1;
+          msg.rate = 0.4;
+          speechSynthesis.speak(msg);
+          /*writeValid=1;
+          const write=document.getElementById("write");
+            write.removeAttribute("disabled");*/
+            
+        }
+
+        /*
+        function speakMessage(message, PAUSE_MS) {
+  try {
+    const messageParts = message.split(' ')
+
+    let currentIndex = 0
+    const speak = (textToSpeak) => {
+      const msg = new SpeechSynthesisUtterance();
+      const voices = window.speechSynthesis.getVoices();
+      msg.volume = 1;
+          msg.rate = 0.4;
+      msg.text = textToSpeak;
+      msg.lang = 'en-US';
+
+      msg.onend = function() {
+        currentIndex++;
+        if (currentIndex < messageParts.length) {
+          setTimeout(() => {
+            if(messageParts[currentIndex].length>0)
+            speak(messageParts[currentIndex])
+          }, PAUSE_MS)
+        }
+      };
+      speechSynthesis.speak(msg);
+    }
+    speak(messageParts[0])
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+
+function say(pause) {
+  speakMessage(text, 300);
+  const write=document.getElementById("write");
+    write.removeAttribute("disabled");
+}*/
+        
+    </script>
+
+</body>
+</html>
