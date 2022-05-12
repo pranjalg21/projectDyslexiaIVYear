@@ -22,5 +22,13 @@
     "virtual-keyboard": "^1.30.3"
   },
   "devDependencies": {},
-  "description": ""
+  "description": "Final Year Project",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pranjalg21/projectDyslexiaIVYear.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pranjalg21/projectDyslexiaIVYear/issues"
+  },
+  "homepage": "https://github.com/pranjalg21/projectDyslexiaIVYear#readme"
 }
