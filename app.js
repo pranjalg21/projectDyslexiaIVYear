@@ -51,6 +51,7 @@ mongoose.connect(process.env.MONGODB_URL, {
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);
 mongoose.set("useCreateIndex", true);
+mongoose.set("directConnection"true);
 
 const userSchema = new mongoose.Schema({
   fname: String,
